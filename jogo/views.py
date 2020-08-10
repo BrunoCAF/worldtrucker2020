@@ -8,9 +8,9 @@ from rest_framework import viewsets
 from .serializers import ScoreSerializer
 from .models import ScoreEntry
 
+
 def home(request):
     return HttpResponse("World Trucker 2020")
-
 
 
 class ScoreViewSet(viewsets.ModelViewSet):
