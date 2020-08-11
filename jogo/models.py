@@ -9,4 +9,4 @@ class ScoreEntry(models.Model):
     ghostInfo = models.TextField(serialize=True, max_length=1000000)
 
     def __str__(self):
-        return self.username + "(" + str(self.userid) + "): " + str(self.conclusionTime)
+        return f"{self.username} ({self.userid}): {self.conclusionTime}"
