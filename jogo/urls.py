@@ -10,5 +10,8 @@ router.register(r'global', views.GlobalScoresViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('ghost', views.ghost, name='ghost'), 
+    path('newuuid', views.gerarUUID, name='gerarUUID'),
+    path('submit', views.submitScore, name='submit'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
