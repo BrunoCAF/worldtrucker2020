@@ -21,7 +21,7 @@ def gerarUUID(request):
 @csrf_exempt
 def submitScore(request):
     print("<TECNICA AVANÇADA DE DEPURAÇÂO>")
-    print(request.POST)
+    print(request.body)
     print("</TECNICA AVANÇADA DE DEPURAÇÂO>")
     name, userid = request.POST["username"], request.POST["userid"]
     time, ghost = request.POST["conclusionTime"], request.POST["ghostInfo"]
