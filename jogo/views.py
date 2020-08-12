@@ -9,7 +9,7 @@ from .serializers import ScoreSerializer, RankSerializer, GhostSerializer
 from .models import ScoreEntry
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from Django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 
 import uuid
 
