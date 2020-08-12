@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://rsc/arena1.png" type="Texture" id=1]
+
+[node name="Arena" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PoolVector2Array( 5, 5, 155, 5, 155, 115, 27, 115, 27, 120, 27, 174, 5, 174, 5, 120 )
+
+[node name="arena1" type="Sprite" parent="."]
+position = Vector2( 80, 60 )
+texture = ExtResource( 1 )
