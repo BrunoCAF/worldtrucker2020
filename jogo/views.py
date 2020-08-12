@@ -53,6 +53,7 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
     def around(self, request, userid, pk=None):
         entry = self.queryset.filter(userid=userid).get()
         if entry.conclusionTime < 0: 
+            lastindex = min(100, ScoreEntry.objects.count())
             qs = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
             maiorRank = 1
             return Response({"rank":maiorRank, "data":RankSerializer(qs, many=True).data})
