@@ -9,6 +9,7 @@ from .serializers import ScoreSerializer, RankSerializer, GhostSerializer
 from .models import ScoreEntry
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import uuid
@@ -76,4 +77,4 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
         
         maiorRank = self.queryset.filter(conclusionTime__lte=tempoacima, conclusionTime__gt=0).count()
         qs = self.queryset.filter(conclusionTime__gte=tempoacima, conclusionTime__lte=tempoabaixo)        
-        return Response({"rank":maiorRank, "data":RankSerializer(qs, many=True).data})
+        return JsonResponse({"rank":maiorRank, "data":RankSerializer(qs, many=True).data})
