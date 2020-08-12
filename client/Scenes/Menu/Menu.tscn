@@ -1,0 +1,305 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Menu/PopupPanel.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Menu/Main.gd" type="Script" id=2]
+[ext_resource path="res://rsc/basic.theme" type="Theme" id=3]
+[ext_resource path="res://rsc/container_h.png" type="Texture" id=4]
+[ext_resource path="res://rsc/player_h.png" type="Texture" id=5]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 32.0
+margin_right = -64.0
+margin_bottom = -32.0
+alignment = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreTabs" type="TabContainer" parent="Main"]
+margin_right = 640.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Top" type="ScrollContainer" parent="Main/ScoreTabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ItemList" type="ItemList" parent="Main/ScoreTabs/Top"]
+margin_right = 632.0
+margin_bottom = 369.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+items = [ "#1", null, false, "#2", null, false, "#3", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false, "Item 6", null, false, "Item 7", null, false, "Item 8", null, false, "Item 9", null, false, "Item 10", null, false, "Item 11", null, false, "Item 12", null, false, "Item 13", null, false, "Item 14", null, false, "Item 15", null, false, "Item 16", null, false, "Item 17", null, false, "Item 18", null, false, "Item 19", null, false, "Item 20", null, false, "Item 21", null, false, "Item 22", null, false, "Item 23", null, false, "Item 24", null, false, "Item 25", null, false, "Item 26", null, false, "Item 27", null, false, "Item 28", null, false ]
+max_text_lines = 64
+
+[node name="Global" type="ScrollContainer" parent="Main/ScoreTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ItemList" type="ItemList" parent="Main/ScoreTabs/Global"]
+margin_right = 632.0
+margin_bottom = 369.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_text_lines = 64
+
+[node name="Local" type="ScrollContainer" parent="Main/ScoreTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 27.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="ItemList" type="ItemList" parent="Main/ScoreTabs/Local"]
+margin_right = 632.0
+margin_bottom = 369.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_text_lines = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main"]
+margin_top = 404.0
+margin_right = 640.0
+margin_bottom = 504.0
+rect_min_size = Vector2( 0, 48 )
+
+[node name="OptionsButton" type="Button" parent="Main/HBoxContainer"]
+margin_right = 318.0
+margin_bottom = 100.0
+focus_neighbour_right = NodePath("../StartButton")
+focus_next = NodePath("../StartButton")
+size_flags_horizontal = 3
+text = "OPTIONS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/HBoxContainer"]
+margin_left = 322.0
+margin_right = 640.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="StartButton" type="Button" parent="Main/HBoxContainer/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+focus_neighbour_left = NodePath("../OptionsButton")
+focus_previous = NodePath("../OptionsButton")
+size_flags_horizontal = 3
+text = "START"
+
+[node name="CheckButton" type="CheckButton" parent="Main/HBoxContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 318.0
+margin_bottom = 100.0
+text = "ENABLE GHOST"
+align = 2
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/VBoxContainer"]
+margin_right = 704.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+margin_right = 704.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+text = "USERNAME:"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 704.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 24 )
+max_length = 32
+context_menu_enabled = false
+placeholder_text = "USERNAME"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="PopupPanel/VBoxContainer"]
+margin_top = 60.0
+margin_right = 704.0
+margin_bottom = 64.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PopupPanel/VBoxContainer"]
+margin_top = 72.0
+margin_right = 704.0
+margin_bottom = 504.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
+margin_right = 704.0
+margin_bottom = 15.0
+text = "APPEARANCE:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
+margin_top = 19.0
+margin_right = 704.0
+margin_bottom = 69.0
+size_flags_horizontal = 3
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Cabin" type="VBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 237.0
+margin_right = 336.0
+margin_bottom = 50.0
+alignment = 1
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer/Cabin"]
+margin_right = 99.0
+margin_bottom = 15.0
+text = "CABIN COLOR"
+align = 1
+valign = 1
+
+[node name="ColorPicker" type="ColorPickerButton" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer/Cabin"]
+margin_top = 19.0
+margin_right = 99.0
+margin_bottom = 50.0
+edit_alpha = false
+
+[node name="Cargo" type="VBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 368.0
+margin_right = 467.0
+margin_bottom = 50.0
+alignment = 1
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer/Cargo"]
+margin_right = 99.0
+margin_bottom = 15.0
+text = "CARGO COLOR"
+align = 1
+valign = 1
+
+[node name="ColorPicker" type="ColorPickerButton" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer/Cargo"]
+margin_top = 19.0
+margin_right = 99.0
+margin_bottom = 50.0
+edit_alpha = false
+
+[node name="ViewportContainer" type="ViewportContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
+margin_top = 73.0
+margin_right = 704.0
+margin_bottom = 396.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 360, 80 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="PopupPanel/VBoxContainer/VBoxContainer2/ViewportContainer"]
+size = Vector2( 704, 323 )
+size_override_stretch = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="player_h" type="Sprite" parent="PopupPanel/VBoxContainer/VBoxContainer2/ViewportContainer/Viewport"]
+position = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+
+[node name="container_h" type="Sprite" parent="PopupPanel/VBoxContainer/VBoxContainer2/ViewportContainer/Viewport"]
+position = Vector2( 20, 4 )
+texture = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="PopupPanel/VBoxContainer/VBoxContainer2/ViewportContainer/Viewport"]
+position = Vector2( 16, 4 )
+current = true
+zoom = Vector2( 0.1, 0.1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
+margin_top = 400.0
+margin_right = 704.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CancelButton" type="Button" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+margin_left = 578.0
+margin_right = 648.0
+margin_bottom = 32.0
+text = "CANCEL"
+
+[node name="SaveButton" type="Button" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
+margin_left = 652.0
+margin_right = 704.0
+margin_bottom = 32.0
+text = "SAVE"
+[connection signal="pressed" from="Main/HBoxContainer/OptionsButton" to="PopupPanel" method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/StartButton" to="Main" method="_on_StartButton_pressed"]
+[connection signal="about_to_show" from="PopupPanel" to="PopupPanel" method="_on_PopupPanel_about_to_show"]
+[connection signal="color_changed" from="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer/Cabin/ColorPicker" to="PopupPanel" method="_on_Cabin_color_changed"]
+[connection signal="color_changed" from="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer/Cargo/ColorPicker" to="PopupPanel" method="_on_Cargo_color_changed"]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer2/CancelButton" to="PopupPanel" method="_on_CancelButton_pressed"]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer2/SaveButton" to="PopupPanel" method="_on_SaveButton_pressed"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://rsc/arena2.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/GoalMarker.tscn" type="PackedScene" id=3]
+
+[node name="Map2" type="StaticBody2D"]
+position = Vector2( -112, 0 )
+
+[node name="arena2" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PoolVector2Array( 152, 600, 152, 40, 752, 40, 752, 560, 232, 560, 232, 600, 232, 720, 152, 720 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 392, 240, 512, 240, 512, 360, 392, 360 )
+
+[node name="GoalMarker" parent="." instance=ExtResource( 3 )]
+position = Vector2( 682, 170 )
+rotation = 1.5708
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2( 192, 550 )
