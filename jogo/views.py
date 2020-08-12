@@ -52,6 +52,10 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
     @action(detail=True)
     def around(self, request, userid, pk=None):
         entry = self.queryset.filter(userid=userid).get()
+        if entry.conclusionTime < 0: 
+            qs = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
+            return Response({"rank":maiorRank, "data":RankSerializer(qs, many=True).data})
+        
         acima = self.queryset.filter(conclusionTime__lt=entry.conclusionTime, conclusionTime__gt=0)
         abaixo = self.queryset.filter(conclusionTime__gt=entry.conclusionTime)
         qtd_acima, qtd_abaixo = min(len(acima), 50), min(len(abaixo), 50)
