@@ -39,9 +39,8 @@ class ScoreViewSet(viewsets.ModelViewSet):
 
 
 class TopScoresViewSet(viewsets.ModelViewSet):
-    entry = ScoreEntry.objects.order_by('conclusionTime')[min(100, ScoreEntry.objects.all().count())]
-    worst = entry.conclusionTime
-    queryset = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0, conclusionTime__lte=worst).only('username', 'conclusionTime')
+    lastindex = min(100, ScoreEntry.objects.count())
+    queryset = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
     serializer_class = RankSerializer
 
 
