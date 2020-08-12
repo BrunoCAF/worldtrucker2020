@@ -9,6 +9,7 @@ from .serializers import ScoreSerializer, RankSerializer, GhostSerializer
 from .models import ScoreEntry
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from Django.views.decorators.csrf import csrf_exempt
 
 import uuid
 
@@ -17,6 +18,8 @@ def gerarUUID(request):
     ScoreEntry.objects.create(username="", userid=userid, conclusionTime=-1, ghostInfo="")
     return HttpResponse(userid)
 
+
+@csrf_exempt
 def submitScore(request):
     name, userid = request.POST["username"], request.POST["userid"]
     time, ghost = request.POST["conclusionTime"], request.POST["ghostInfo"]
