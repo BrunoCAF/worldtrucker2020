@@ -26,10 +26,12 @@ def submitScore(request):
     ScoreEntry.objects.filter(userid=userid).update(username=name, conclusionTime=time, ghostInfo=ghost)
     return HttpResponse("deu certo sim, pode confiar")
 
+
 def ghost(request):
     rank = int(request.GET["rank"])
-    entry = ScoreEntry.objects.order_by("conclusionTime").all()[rank-1]
+    entry = ScoreEntry.objects.filter(conclusionTime__gt=0).order_by("conclusionTime").all()[rank-1]
     return HttpResponse(entry.ghostInfo)
+
 
 class ScoreViewSet(viewsets.ModelViewSet):
     queryset = ScoreEntry.objects.all().order_by('conclusionTime')
