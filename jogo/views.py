@@ -20,6 +20,9 @@ def gerarUUID(request):
 
 @csrf_exempt
 def submitScore(request):
+    print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
+    print(json.loads(request.body.decode()))
+    print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
     dicio = json.loads(request.body.decode())
     name, userid = dicio["username"], dicio["userid"]
     time, ghost = dicio["conclusionTime"], dicio["ghostInfo"]
@@ -48,6 +51,7 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
     queryset = ScoreEntry.objects.order_by('conclusionTime').only('username', 'conclusionTime')
     serializer_class = ScoreSerializer
     lookup_field = 'userid'
+    #print('')
 
     @action(detail=True)
     def around(self, request, userid, pk=None):
