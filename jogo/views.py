@@ -18,9 +18,9 @@ def gerarUUID(request):
     ScoreEntry.objects.create(username="", userid=userid, conclusionTime=-1, ghostInfo="")
     return HttpResponse(userid)
 
-
 @csrf_exempt
 def submitScore(request):
+    print(request.POST)
     name, userid = request.POST["username"], request.POST["userid"]
     time, ghost = request.POST["conclusionTime"], request.POST["ghostInfo"]
     ScoreEntry.objects.update_or_create(username=name, userid=userid, conclusionTime=time, ghostInfo=ghost)
