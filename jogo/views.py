@@ -54,6 +54,7 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
         entry = self.queryset.filter(userid=userid).get()
         if entry.conclusionTime < 0: 
             qs = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
+            maiorRank = 1
             return Response({"rank":maiorRank, "data":RankSerializer(qs, many=True).data})
         
         acima = self.queryset.filter(conclusionTime__lt=entry.conclusionTime, conclusionTime__gt=0)
