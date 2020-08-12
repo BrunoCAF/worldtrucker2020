@@ -1,1 +1,2 @@
-web: gunicorn worldtrucker2020.wsgi --log-file -
+release: python manage.py makemigrations && python manage.py migrate
+web: python manage.py runserver 0.0.0.0:$PORT
