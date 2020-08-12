@@ -10,7 +10,7 @@ from .models import ScoreEntry
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 import uuid
 
 def gerarUUID(request):
@@ -20,12 +20,11 @@ def gerarUUID(request):
 
 @csrf_exempt
 def submitScore(request):
-    print("<TECNICA AVANÇADA DE DEPURAÇÂO>")
-    print(request.body)
-    print("</TECNICA AVANÇADA DE DEPURAÇÂO>")
-    name, userid = request.POST["username"], request.POST["userid"]
-    time, ghost = request.POST["conclusionTime"], request.POST["ghostInfo"]
-    ScoreEntry.objects.update_or_create(username=name, userid=userid, conclusionTime=time, ghostInfo=ghost)
+    dicio = json.loads(request.body.decode())
+    name, userid = dicio["username"], dicio["userid"]
+    time, ghost = dicio["conclusionTime"], dicio["ghostInfo"]
+    ScoreEntry.objects.filter(userid=userid).update(username=name, conclusionTime=time, ghostInfo=ghost)
+    return HttpResponse("deu certo sim, pode confiar")
 
 def ghost(request):
     rank = int(request.GET["rank"])
