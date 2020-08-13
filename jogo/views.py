@@ -51,7 +51,6 @@ class TopScoresViewSet(viewsets.ModelViewSet):
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
     print(num)
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
-    queryset = ScoreEntry.objects.all().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
     serializer_class = RankSerializer
 
 
@@ -73,7 +72,6 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
             print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
             print(num)
             print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
-            queryset = ScoreEntry.objects.all().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
             return Response({"rank":maiorRank, "data":RankSerializer(queryset, many=True).data})
         
         acima = self.queryset.filter(conclusionTime__lt=entry.conclusionTime, conclusionTime__gt=0)
