@@ -44,7 +44,10 @@ class ScoreViewSet(viewsets.ModelViewSet):
 
 class TopScoresViewSet(viewsets.ModelViewSet):
     lastindex = min(100, ScoreEntry.objects.count())
-    queryset = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
+    print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
+    print(lastindex)
+    print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
+    queryset = ScoreEntry.objects.all().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
     serializer_class = RankSerializer
 
 
