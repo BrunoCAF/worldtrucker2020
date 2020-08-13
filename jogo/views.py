@@ -43,11 +43,7 @@ class ScoreViewSet(viewsets.ModelViewSet):
 
 
 class TopScoresViewSet(viewsets.ModelViewSet):
-    qs = ScoreEntry.objects.all().order_by('conclusionTime').only('username', 'conclusionTime').filter(conclusionTime__gt=0)
-    num = min(qs.count(), 100)
-    uid = qs[num-1].userid
-    tempo = qs.filter(userid=uid).get().conclusionTime
-    queryset = qs.filter(conclusionTime__lte=tempo)
+    queryset = ScoreEntry.objects.all().order_by('conclusionTime').only('username', 'conclusionTime').filter(conclusionTime__gt=0)
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
     print(num)
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
@@ -64,11 +60,7 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
     def around(self, request, userid, pk=None):
         entry = self.queryset.filter(userid=userid).get()
         if entry.conclusionTime < 0: 
-            qs = ScoreEntry.objects.all().order_by('conclusionTime').only('username', 'conclusionTime').filter(conclusionTime__gt=0)
-            num = min(qs.count(), 100)
-            uid = qs[num-1].userid
-            tempo = qs.filter(userid=uid).get().conclusionTime
-            queryset = qs.filter(conclusionTime__lte=tempo)
+            queryset = ScoreEntry.objects.all().order_by('conclusionTime').only('username', 'conclusionTime').filter(conclusionTime__gt=0)
             print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
             print(num)
             print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
