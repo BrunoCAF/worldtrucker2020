@@ -43,9 +43,13 @@ class ScoreViewSet(viewsets.ModelViewSet):
 
 
 class TopScoresViewSet(viewsets.ModelViewSet):
-    lastindex = min(100, ScoreEntry.objects.all().count())
+    qs = ScoreEntry.objects.order_by('conclusionTime').only('username', 'conclusionTime').filter(conclusionTime__gt=0)
+    num = min(qs.count(), 100)
+    uid = qs[num-1].userid
+    tempo = qs.filter(userid=uid).get().conclusionTime
+    queryset = qs.filter(conclusionTime__lte=tempo)
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
-    print(lastindex)
+    print(num)
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
     queryset = ScoreEntry.objects.all().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
     serializer_class = RankSerializer
@@ -61,10 +65,16 @@ class GlobalScoresViewSet(viewsets.ModelViewSet):
     def around(self, request, userid, pk=None):
         entry = self.queryset.filter(userid=userid).get()
         if entry.conclusionTime < 0: 
-            lastindex = min(100, ScoreEntry.objects.count())
-            qs = ScoreEntry.objects.get_queryset().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
-            maiorRank = 1
-            return Response({"rank":maiorRank, "data":RankSerializer(qs, many=True).data})
+            qs = ScoreEntry.objects.order_by('conclusionTime').only('username', 'conclusionTime').filter(conclusionTime__gt=0)
+            num = min(qs.count(), 100)
+            uid = qs[num-1].userid
+            tempo = qs.filter(userid=uid).get().conclusionTime
+            queryset = qs.filter(conclusionTime__lte=tempo)
+            print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
+            print(num)
+            print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
+            queryset = ScoreEntry.objects.all().order_by('conclusionTime').filter(conclusionTime__gt=0)[:lastindex].only('username', 'conclusionTime')
+            return Response({"rank":maiorRank, "data":RankSerializer(queryset, many=True).data})
         
         acima = self.queryset.filter(conclusionTime__lt=entry.conclusionTime, conclusionTime__gt=0)
         abaixo = self.queryset.filter(conclusionTime__gt=entry.conclusionTime)
