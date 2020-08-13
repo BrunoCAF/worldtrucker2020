@@ -43,7 +43,7 @@ class ScoreViewSet(viewsets.ModelViewSet):
 
 
 class TopScoresViewSet(viewsets.ModelViewSet):
-    lastindex = min(100, ScoreEntry.objects.count())
+    lastindex = min(100, ScoreEntry.objects.all().count())
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
     print(lastindex)
     print("TÉCNICA DE DEPURAÇÃO AVANÇADA")
