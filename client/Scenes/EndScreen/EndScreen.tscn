@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/EndScreen/EndScreen.gd" type="Script" id=1]
+[ext_resource path="res://rsc/basic.theme" type="Theme" id=2]
+[ext_resource path="res://rsc/font48.tres" type="DynamicFont" id=3]
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 796.0
+margin_bottom = 596.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer2"]
+margin_right = 792.0
+margin_bottom = 592.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_top = 201.0
+margin_right = 792.0
+margin_bottom = 244.0
+custom_fonts/font = ExtResource( 3 )
+text = "CONGRATULATIONS"
+align = 1
+valign = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_top = 248.0
+margin_right = 792.0
+margin_bottom = 263.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer4"]
+margin_right = 394.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "YOUR TIME :"
+align = 2
+
+[node name="Time" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer4"]
+margin_left = 398.0
+margin_right = 792.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_top = 267.0
+margin_right = 792.0
+margin_bottom = 282.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5"]
+margin_right = 394.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "YOUR BEST LOCAL TIME :"
+align = 2
+
+[node name="Time" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer5"]
+margin_left = 398.0
+margin_right = 792.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_top = 286.0
+margin_right = 792.0
+margin_bottom = 301.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer6"]
+margin_right = 394.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "YOUR BEST ONLINE TIME :"
+align = 2
+
+[node name="Time" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer/HBoxContainer6"]
+margin_left = 398.0
+margin_right = 792.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+
+[node name="SubmitButton" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_left = 334.0
+margin_top = 305.0
+margin_right = 458.0
+margin_bottom = 336.0
+size_flags_horizontal = 4
+text = "SUBMIT SCORE"
+
+[node name="Status" type="Label" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_top = 340.0
+margin_right = 792.0
+margin_bottom = 355.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EXIT" type="Button" parent="PanelContainer/VBoxContainer2/VBoxContainer"]
+margin_left = 370.0
+margin_top = 359.0
+margin_right = 422.0
+margin_bottom = 390.0
+size_flags_horizontal = 4
+text = "MENU"
+[connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/SubmitButton" to="." method="_on_SubmitButton_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer2/VBoxContainer/EXIT" to="." method="_on_EXIT_pressed"]

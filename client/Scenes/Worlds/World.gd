@@ -10,8 +10,6 @@ var current_map = 1
 var player = null
 var maps = []
 
-onready var ghost = $"/root/GameManager".GhostData
-onready var score = $"/root/GameManager".Score
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_maps()
@@ -60,6 +58,7 @@ func _process(delta):
 	if player.progress >= 1:
 		current_map += 1
 		if current_map > maps.size():
+			$"/root/GameManager".current_score = elapsed_time
 			$"/root/GameManager".end_game()
 		else:
 			self.setup_map(current_map)

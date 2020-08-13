@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Menu/PopupPanel.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Menu/Main.gd" type="Script" id=2]
 [ext_resource path="res://rsc/basic.theme" type="Theme" id=3]
 [ext_resource path="res://rsc/container_h.png" type="Texture" id=4]
 [ext_resource path="res://rsc/player_h.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Menu/Top.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Menu/Global.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Menu/Local.gd" type="Script" id=8]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -33,7 +36,7 @@ __meta__ = {
 
 [node name="ScoreTabs" type="TabContainer" parent="Main"]
 margin_right = 640.0
-margin_bottom = 400.0
+margin_bottom = 452.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -48,13 +51,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="ItemList" type="ItemList" parent="Main/ScoreTabs/Top"]
+[node name="Top" type="ItemList" parent="Main/ScoreTabs/Top"]
 margin_right = 632.0
-margin_bottom = 369.0
+margin_bottom = 421.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-items = [ "#1", null, false, "#2", null, false, "#3", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false, "Item 6", null, false, "Item 7", null, false, "Item 8", null, false, "Item 9", null, false, "Item 10", null, false, "Item 11", null, false, "Item 12", null, false, "Item 13", null, false, "Item 14", null, false, "Item 15", null, false, "Item 16", null, false, "Item 17", null, false, "Item 18", null, false, "Item 19", null, false, "Item 20", null, false, "Item 21", null, false, "Item 22", null, false, "Item 23", null, false, "Item 24", null, false, "Item 25", null, false, "Item 26", null, false, "Item 27", null, false, "Item 28", null, false ]
 max_text_lines = 64
+script = ExtResource( 6 )
 
 [node name="Global" type="ScrollContainer" parent="Main/ScoreTabs"]
 visible = false
@@ -68,12 +71,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="ItemList" type="ItemList" parent="Main/ScoreTabs/Global"]
+[node name="Global" type="ItemList" parent="Main/ScoreTabs/Global"]
 margin_right = 632.0
-margin_bottom = 369.0
+margin_bottom = 421.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_text_lines = 64
+script = ExtResource( 7 )
 
 [node name="Local" type="ScrollContainer" parent="Main/ScoreTabs"]
 visible = false
@@ -87,22 +91,23 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="ItemList" type="ItemList" parent="Main/ScoreTabs/Local"]
+[node name="Local" type="ItemList" parent="Main/ScoreTabs/Local"]
 margin_right = 632.0
-margin_bottom = 369.0
+margin_bottom = 421.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_text_lines = 64
+script = ExtResource( 8 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main"]
-margin_top = 404.0
+margin_top = 456.0
 margin_right = 640.0
 margin_bottom = 504.0
 rect_min_size = Vector2( 0, 48 )
 
 [node name="OptionsButton" type="Button" parent="Main/HBoxContainer"]
 margin_right = 318.0
-margin_bottom = 100.0
+margin_bottom = 48.0
 focus_neighbour_right = NodePath("../StartButton")
 focus_next = NodePath("../StartButton")
 size_flags_horizontal = 3
@@ -111,7 +116,7 @@ text = "OPTIONS"
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/HBoxContainer"]
 margin_left = 322.0
 margin_right = 640.0
-margin_bottom = 100.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="StartButton" type="Button" parent="Main/HBoxContainer/VBoxContainer"]
@@ -124,6 +129,7 @@ size_flags_horizontal = 3
 text = "START"
 
 [node name="CheckButton" type="CheckButton" parent="Main/HBoxContainer/VBoxContainer"]
+visible = false
 margin_top = 52.0
 margin_right = 318.0
 margin_bottom = 100.0
@@ -131,7 +137,6 @@ text = "ENABLE GHOST"
 align = 2
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -146,10 +151,10 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = -32.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -161,11 +166,11 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/VBoxContainer"]
-margin_right = 704.0
+margin_right = 760.0
 margin_bottom = 52.0
 
 [node name="Label" type="Label" parent="PopupPanel/VBoxContainer/VBoxContainer"]
-margin_right = 704.0
+margin_right = 760.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
 text = "USERNAME:"
@@ -173,7 +178,7 @@ valign = 1
 
 [node name="LineEdit" type="LineEdit" parent="PopupPanel/VBoxContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 704.0
+margin_right = 760.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 24 )
 max_length = 32
@@ -186,32 +191,32 @@ __meta__ = {
 
 [node name="HSeparator" type="HSeparator" parent="PopupPanel/VBoxContainer"]
 margin_top = 60.0
-margin_right = 704.0
+margin_right = 760.0
 margin_bottom = 64.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PopupPanel/VBoxContainer"]
 margin_top = 72.0
-margin_right = 704.0
-margin_bottom = 504.0
+margin_right = 760.0
+margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
-margin_right = 704.0
+margin_right = 760.0
 margin_bottom = 15.0
 text = "APPEARANCE:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
 margin_top = 19.0
-margin_right = 704.0
+margin_right = 760.0
 margin_bottom = 69.0
 size_flags_horizontal = 3
 custom_constants/separation = 32
 alignment = 1
 
 [node name="Cabin" type="VBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 237.0
-margin_right = 336.0
+margin_left = 265.0
+margin_right = 364.0
 margin_bottom = 50.0
 alignment = 1
 
@@ -229,8 +234,8 @@ margin_bottom = 50.0
 edit_alpha = false
 
 [node name="Cargo" type="VBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 368.0
-margin_right = 467.0
+margin_left = 396.0
+margin_right = 495.0
 margin_bottom = 50.0
 alignment = 1
 
@@ -249,8 +254,8 @@ edit_alpha = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
 margin_top = 73.0
-margin_right = 704.0
-margin_bottom = 396.0
+margin_right = 760.0
+margin_bottom = 452.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 360, 80 )
@@ -259,10 +264,10 @@ size_flags_vertical = 7
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="PopupPanel/VBoxContainer/VBoxContainer2/ViewportContainer"]
-size = Vector2( 704, 323 )
+size = Vector2( 760, 379 )
 size_override_stretch = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="player_h" type="Sprite" parent="PopupPanel/VBoxContainer/VBoxContainer2/ViewportContainer/Viewport"]
 position = Vector2( 4, 4 )
@@ -278,22 +283,22 @@ current = true
 zoom = Vector2( 0.1, 0.1 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PopupPanel/VBoxContainer/VBoxContainer2"]
-margin_top = 400.0
-margin_right = 704.0
-margin_bottom = 432.0
+margin_top = 456.0
+margin_right = 760.0
+margin_bottom = 488.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_horizontal = 3
 alignment = 2
 
 [node name="CancelButton" type="Button" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
-margin_left = 578.0
-margin_right = 648.0
+margin_left = 634.0
+margin_right = 704.0
 margin_bottom = 32.0
 text = "CANCEL"
 
 [node name="SaveButton" type="Button" parent="PopupPanel/VBoxContainer/VBoxContainer2/HBoxContainer2"]
-margin_left = 652.0
-margin_right = 704.0
+margin_left = 708.0
+margin_right = 760.0
 margin_bottom = 32.0
 text = "SAVE"
 [connection signal="pressed" from="Main/HBoxContainer/OptionsButton" to="PopupPanel" method="_on_OptionsButton_pressed"]

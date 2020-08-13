@@ -1,13 +1,15 @@
 extends Node
 
 var player_data_filename : String = "user://player_data.save"
+var local_score_filename : String = "user://local_score.save"
 
-const save_version : String = "0.1.1"
+const save_version : String = "0.2.0"
 class PlayerData:
 	var cabin_color : String = Color.white.to_html()
 	var cargo_color : String = Color.white.to_html()
 	var username : String = "Unknown Player"
 	var version : String = save_version
+	var uuid : String = "null"
 
 class GhostInfo:
 	var x : Array = []
@@ -18,35 +20,71 @@ class GhostInfo:
 class GhostData:
 	var ghosts : Array = []
 
-class Score:
-	var username : String
-	var time : float
-
 class Scores:
 	var scores : Array = []
-	func get_ghost(position: int) -> GhostData:
-		return null
-
-class LocalScores:
-	extends Scores
-	var ghosts : Array = []
-	func get_ghost(position: int) -> GhostData:
-		return ghosts[position]
 	
 var player_data : PlayerData = PlayerData.new()
-
-var score_field = {
-	"username" : null,
-	"conclusionTime" : null,
-	"ghostInfo" : null
-}
+var local_scores : Array = []
+var current_ghost_data : GhostData = GhostData.new()
+var current_score : float = 0.0
+var best_score : float = -1.0
+var ghost_data : GhostData = null
 
 onready var world = load("res://Scenes/Worlds/World.tscn")
 onready var menu = load("res://Scenes/Menu/Menu.tscn")
+onready var end_screen = load("res://Scenes/EndScreen/EndScreen.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_data()
+	load_scores()
+	print(local_scores)
+	check_uuid()
 	pass # Replace with function body.
+
+func load_scores():
+	var file = File.new()
+	if not file.file_exists(local_score_filename):
+		save_scores()
+		return
+	file.open(local_score_filename, File.READ)
+	best_score = file.get_var(true)
+	while true:
+		var score = file.get_var(true)
+		if score:
+			self.local_scores.push_back(score)
+		else:
+			return
+
+func save_scores():
+	var file = File.new()
+	file.open(local_score_filename, File.WRITE)
+	file.store_var(best_score)
+	for score in local_scores:
+		file.store_var(score, true)
+
+func add_score():
+	local_scores.push_back(current_score)
+	local_scores.sort()
+	if local_scores.size() > 10:
+		local_scores.pop_back()
+	save_scores()
+	pass
+
+func check_uuid():
+	if self.player_data.uuid != "null":
+		return
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.connect("request_completed", self, "set_uuid")
+	
+	var error = http_request.request("https://worldtrucker2020.herokuapp.com/newuuid", ["Cache-Control: no-cache"])
+	if error != OK:
+		push_error("Unable to get UUID from server, maybe a connection problem?")
+	
+func set_uuid(result, response_code, headers, body):
+	self.player_data.uuid = body.get_string_from_utf8()
+	print("got new UUID from server")
+	save_data()
 
 func load_data():
 	var file = File.new()
@@ -80,5 +118,10 @@ func start_game():
 	get_tree().change_scene_to(world)
 
 func end_game():
+	get_tree().change_scene_to(end_screen)
+
+func go_to_menu():
 	get_tree().change_scene_to(menu)
-	var scores = []
+	current_score = 0.0
+	current_ghost_data = GhostData.new()
+	ghost_data = null
